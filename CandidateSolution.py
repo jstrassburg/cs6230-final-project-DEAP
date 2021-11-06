@@ -1,3 +1,6 @@
+from geopy import distance
+
+
 class CandidateSolution:
     size = 4  # TODO: this is fake
 
