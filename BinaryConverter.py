@@ -9,8 +9,14 @@ class BinaryConverter:
 
     @staticmethod
     def binary_list_to_int(binary_list: list[str]) -> int:
-        return int("".join(binary_list), 2)
+        to_strings = [str(i) for i in binary_list]
+        return int("".join(to_strings), 2)
 
     @staticmethod
     def bits_needed(count: int) -> int:
         return ceil(log(count, 2))
+
+    @staticmethod
+    def chunk_list(binary_list: list[str], bits_per_chunk: int) -> list:
+        for i in range(0, len(binary_list), bits_per_chunk):
+            yield binary_list[i:i + bits_per_chunk]

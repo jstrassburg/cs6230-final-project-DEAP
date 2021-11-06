@@ -17,16 +17,3 @@ source .env/bin/activate # or for Windows, .\.env\Scripts\activate
 pip install setuptools<58
 pip install -r requirements.txt
 ```
-
-## Famous Addresses Used
-
-The example contained herein uses famous address in the United States as points in the _Travaling Salesman Problem_.
-
-* The White House - 1600 Pennsylvania Avenue, Washington DC  20006
-* Wall Street - 11 Wall Street New York, NY  10005
-* Empire State Building - 350 Fifth Avenue New York, NY 10118
-* The Hollywood Sign - 4059 Mt Lee Dr. Hollywood, CA 90068
-* The Gateway Arch - The Gateway Arch, St. Louis, MO
-* The Golden Gate Bridge - Golden Gate Bridge, San Francisco, CA
-* The Space Needle - Space Needle, Broad Street, Seattle, WA
-* MSOE - 1025 N Broadway, Milwaukee, WI 53202
