@@ -13,11 +13,10 @@ class CandidateSolutionEvaluator:
         if address_count < 2:
             raise "Must be evaluating at least 2 addresses."
         total_distance = 0.0
-        for address_index in chromosome:
-            if address_index < address_count - 1:
-                first = self._locations[address_index]
-                second = self._locations[address_index + 1]
-                total_distance += distance.distance(first.point, second.point).miles
+        for i in range(len(chromosome)-1):
+            first = self._locations[chromosome[i]]
+            second = self._locations[chromosome[i+1]]
+            total_distance += distance.distance(first.point, second.point).miles
         # Now, do the loop around back to the first location
         first = self._locations[-1]
         second = self._locations[0]
