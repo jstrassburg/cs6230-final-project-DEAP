@@ -22,34 +22,38 @@ class Program:
     @staticmethod
     def main():
         evaluator = CandidateSolutionEvaluator(addresses)
-        chromosome_length = evaluator.get_chromosome_length()
         creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
         creator.create("Individual", list, fitness=creator.FitnessMin)
 
         toolbox = base.Toolbox()
-        toolbox.register("attr_bool", random.randint, 0, 1)
-        toolbox.register("individual", tools.initRepeat, creator.Individual, toolbox.attr_bool, chromosome_length)
+        toolbox.register("attr_index", Program.random_indexes)
+        toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.attr_index)
         toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
         toolbox.register("evaluate", evaluator.evaluate)
-        toolbox.register("mate", tools.cxTwoPoint)
-        toolbox.register("mutate", tools.mutFlipBit, indpb=0.05)
+        toolbox.register("mate", tools.cxOrdered)
+        toolbox.register("mutate", tools.mutShuffleIndexes, indpb=0.05)
         toolbox.register("select", tools.selTournament, tournsize=3)
 
-        population = toolbox.population(n=100)
+        population = toolbox.population(n=500)
 
         hof = tools.HallOfFame(maxsize=1)
-        final_population = algorithms.eaSimple(population, toolbox, cxpb=0.5, mutpb=0.1, ngen=500, halloffame=hof)
+        final_population = algorithms.eaSimple(population, toolbox, cxpb=0.5, mutpb=0.1, ngen=1000, halloffame=hof)
 
         print(f"Final population: {final_population}")
         best_solution = hof[0]
         print(f"Best solution: {best_solution}, fitness: {best_solution.fitness}")
-        solution_addresses = evaluator.decode_chromosome_to_address_list(best_solution)
         print("The solution addresses in order are:\n*************************")
-        for solution_address in solution_addresses:
-            print(solution_address)
+        for address_index in best_solution:
+            print(addresses[address_index])
         print("*************************")
         print(f"Total miles: {best_solution.fitness}")
+
+    @staticmethod
+    def random_indexes():
+        non_random_indexes = list(range(len(addresses)))
+        random.shuffle(non_random_indexes)
+        return non_random_indexes
 
 
 if __name__ == "__main__":
