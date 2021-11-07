@@ -35,10 +35,10 @@ class Program:
         toolbox.register("mutate", tools.mutShuffleIndexes, indpb=0.05)
         toolbox.register("select", tools.selTournament, tournsize=3)
 
-        population = toolbox.population(n=100)
+        population = toolbox.population(n=25)
 
         hof = tools.HallOfFame(maxsize=1)
-        final_population = algorithms.eaSimple(population, toolbox, cxpb=0.5, mutpb=0.5, ngen=250, halloffame=hof)
+        final_population = algorithms.eaSimple(population, toolbox, cxpb=0.5, mutpb=0.5, ngen=50, halloffame=hof)
 
         print(f"Final population: {final_population}")
         best_solution = hof[0]
