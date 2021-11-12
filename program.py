@@ -12,6 +12,12 @@ addresses = [
     '600 E Fremont St, Las Vegas, NV 89101',
     '17135 W. Bluemound Rd. Brookfield, WI 53005-5915',
     '2455 Telegraph Ave. Berkeley, CA 94704',
+    '61 Rainey St, Austin, TX 78701',
+    'Austin, TX 78712',
+    '300 Alamo Plaza, San Antonio, TX 78205',
+    '553 Central Ave, Kansas City, KS 66101',
+    '801 Market St, St. Louis, MO 63101',
+    '201 W Capitol Ave, Jefferson City, MO 65101'
 ]
 
 
@@ -35,10 +41,10 @@ class Program:
         toolbox.register("mutate", tools.mutShuffleIndexes, indpb=0.05)
         toolbox.register("select", tools.selTournament, tournsize=3)
 
-        population = toolbox.population(n=25)
+        population = toolbox.population(n=100)
 
         hof = tools.HallOfFame(maxsize=1)
-        final_population = algorithms.eaSimple(population, toolbox, cxpb=0.5, mutpb=0.5, ngen=50, halloffame=hof)
+        final_population = algorithms.eaSimple(population, toolbox, cxpb=0.5, mutpb=0.5, ngen=500, halloffame=hof)
 
         print(f"Final population: {final_population}")
         best_solution = hof[0]
